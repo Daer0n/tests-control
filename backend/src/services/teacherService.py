@@ -6,8 +6,11 @@ from sqlalchemy.ext.asyncio.session import AsyncSession
 from schemas.filters import GetUserFilter, PatchUserFilter
 
 from repositories.teacherRepositories import TeacherRepostitore
-from schemas.dtos import SaveUserDto
+from schemas.dtos import SaveUserDto, SaveAnswerDto, SaveExerciseDto, SaveQuestionDto
 from models.users.teacher import Teacher
+from models.exercise.exercise import Exercise
+from models.exercise.answer import Answer
+from models.exercise.question import Question
 
 class TeacherService():
     def __init__(self, db: AsyncSession):
@@ -41,3 +44,27 @@ class TeacherService():
 
     async def update_teacher(self, filter: PatchUserFilter):
         return await self._database.update_teacher(filter)
+    
+    async def save_exercise(self, dto: SaveExerciseDto):
+        model = Exercise(
+            theory=dto.theory,
+            theme=dto.theme,
+            level=dto.level
+        )
+        return await self._database.create_exercise(model)
+    
+    async def save_question(self, dto: SaveQuestionDto):
+        model = Question(
+            question_text=dto.question_text,
+            scores=dto.scores,
+            exercise_id=dto.exercise_id
+        )
+        return await self._database.create_question(model)
+    
+    async def save_answer(self, dto: SaveAnswerDto):
+        model = Answer(
+            text=dto.text,
+            is_correct=dto.is_correct,
+            question_id=dto.question_id
+        )
+        return await self._database.create_answer(model)

@@ -8,6 +8,7 @@ from pydantic import BaseModel
 from schemas.filters import GetUserFilter, PatchUserFilter
 from services.studentService import StudentService
 from schemas.schemas import UserCreate
+from schemas.dtos import SaveUserDto
 from routers.authRouter import hash_password
 
 
@@ -33,7 +34,7 @@ def create_router(
         password: str,
         service: StudentService = Depends(get_service),
     ):
-        dto = UserCreate(
+        dto = SaveUserDto(
             name=name,
             role='Student',
             password=hash_password(password)

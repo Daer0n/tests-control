@@ -4,6 +4,9 @@ from fastapi import HTTPException
 
 
 from models.users.teacher import Teacher
+from models.exercise.exercise import Exercise
+from models.exercise.question import Question
+from models.exercise.answer import Answer
 from schemas.filters import GetUserFilter, PatchUserFilter
 
 class TeacherRepostitore:
@@ -50,7 +53,25 @@ class TeacherRepostitore:
         if filter.password is not None:
             teacher.password = filter.password
         return await self.create_teacher(teacher)
+    
+    async def create_exercise(self, exercise: Exercise):
+        async with self.session.begin_nested():
+            self.session.add(exercise)
+            await self.session.flush()
+        return exercise
+    
 
+    async def create_question(self, question: Question):
+        async with self.session.begin_nested():
+            self.session.add(question)
+            await self.session.flush()
+        return question
+
+    async def create_answer(self, answer: Answer):
+        async with self.session.begin_nested():
+            self.session.add(answer)
+            await self.session.flush()
+        return answer
     
         
 
