@@ -6,7 +6,7 @@ from fastapi import HTTPException
 from models.users.teacher import Teacher
 from schemas.filters import GetUserFilter, PatchUserFilter
 
-class FileObjectRepostitore:
+class TeacherRepostitore:
     def __init__(self, session: AsyncSession):
         self.session = session
 
@@ -15,7 +15,6 @@ class FileObjectRepostitore:
         async with self.session.begin_nested():
             self.session.add(model)
             await self.session.flush()
-
         return model
 
 
@@ -23,7 +22,6 @@ class FileObjectRepostitore:
         models = await self.read_teacher(filter)
         for model in models:
             await self.session.delete(model)
-        #await self.session.commit()
         return {'ok': True}
     
     
@@ -41,11 +39,15 @@ class FileObjectRepostitore:
         return items 
     
     
-    async def update_file(self, filter: PatchUserFilter):
-        teacher = await self.read_teacher(filter)
+    async def update_teacher(self, filter: PatchUserFilter):
+        user_filter = GetUserFilter(
+            id=filter.id,
+            name=filter.name
+        )
+        teacher = await self.read_teacher(user_filter)
         if filter.name is not None:
             teacher.name = filter.name
-        if filter.path is not None:
+        if filter.password is not None:
             teacher.password = filter.password
         return await self.create_teacher(teacher)
 

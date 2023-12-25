@@ -4,7 +4,9 @@ from sqlalchemy.ext.asyncio import AsyncEngine, async_sessionmaker
 
 from database.database import engine
 from services.studentService import StudentService
-from routers.studentRouter import create_router as create_user_touter
+from services.teacherService import TeacherService
+from routers.studentRouter import create_router as create_student_touter
+from routers.teacherRouter import create_router as create_teacher_router
 
 
 app = FastAPI(
@@ -31,5 +33,15 @@ async def get_student_service():
             service = StudentService(session)
             yield service
 
-student_router = create_user_touter(get_student_service)
+async def get_teacher_service():
+    async with SessionLocal() as session:
+        async with session.begin():
+            service = TeacherService(session)
+            yield service
+
+student_router = create_student_touter(get_student_service)
 app.include_router(student_router, prefix="/student", tags=["student"])
+
+
+teacher_router = create_teacher_router(get_teacher_service)
+app.include_router(teacher_router, prefix="/teacher", tags=["teacher"])
