@@ -7,6 +7,7 @@ from services.studentService import StudentService
 from services.teacherService import TeacherService
 from routers.studentRouter import create_router as create_student_touter
 from routers.teacherRouter import create_router as create_teacher_router
+from routers.authRouter import create_router as create_auth_router
 
 
 app = FastAPI(
@@ -39,9 +40,11 @@ async def get_teacher_service():
             service = TeacherService(session)
             yield service
 
+auth_router = create_auth_router(get_teacher_service, get_student_service)
+app.include_router(auth_router, prefix="/auth", tags=["auth"])
+
 student_router = create_student_touter(get_student_service)
 app.include_router(student_router, prefix="/student", tags=["student"])
-
 
 teacher_router = create_teacher_router(get_teacher_service)
 app.include_router(teacher_router, prefix="/teacher", tags=["teacher"])
