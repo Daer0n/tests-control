@@ -1,10 +1,15 @@
+import random
+
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import insert, delete, select
+from sqlalchemy import insert, delete, select, and_
 from fastapi import HTTPException
 
 
 from models.users.student import Student
-from schemas.filters import GetUserFilter, PatchUserFilter
+from models.exercise.exercise import Exercise
+from models.exercise.answer import Answer
+from models.exercise.question import Question
+from schemas.filters import GetUserFilter, PatchUserFilter, GetExerciseFilter
 
 class StudentRepostitore:
     def __init__(self, session: AsyncSession):
@@ -50,8 +55,40 @@ class StudentRepostitore:
         if filter.password is not None:
             student.password = filter.password
         return await self.create_student(student)
-
     
-        
+    async def get_random_exercise(self, filter: GetExerciseFilter) -> Exercise:
+        stmt = select(Exercise).order_by(Exercise.theme, Exercise.level)
+        stmt = stmt.where(and_(Exercise.theme == filter.theme, Exercise.level == filter.level))
+        results = await self.session.scalars(stmt)
+        items = list(results.all())
+        if not items:
+            raise HTTPException(status_code=404, detail="Exercise not found")
+        return random.choice(items)
+    
+    async def get_questions(self, exercise_id: int) -> list[Question]:
+        stmt = select(Question).where(Question.exercise_id == exercise_id)
+        results = await self.session.scalars(stmt)
+        items = list(results.all())
+        if not items:
+            raise HTTPException(status_code=404, detail="Questions not found")
+        return items 
+    
+
+    async def get_answer(self, question_id: int) -> list[Answer]:
+        stmt = select(Answer).where(Answer.question_id == question_id)
+        results = await self.session.scalars(stmt)
+        items = list(results.all())
+        if not items:
+            raise HTTPException(status_code=404, detail="Answers not found")
+        return items 
+    
+    async def get_right_answer(self, question_id) -> Answer:
+        stmt = select(Answer).where(Answer.question_id == question_id)
+        stmt = stmt.where(Answer.is_correct == True)
+        results = await self.session.scalars(stmt)
+        items = list(results.all())
+        if not items:
+            raise HTTPException(status_code=404, detail="Right question not found")
+        return items[0]
 
 

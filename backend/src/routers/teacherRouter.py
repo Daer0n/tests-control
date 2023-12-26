@@ -116,13 +116,11 @@ def create_router(
     )
     async def add_question(
         question_text: str,
-        scores: int,
         exercise_id: int,
         service: TeacherService = Depends(get_service),
     ):
         dto = SaveQuestionDto(
             question_text=question_text,
-            scores=scores,
             exercise_id=exercise_id
         )
         return await service.save_question(dto)

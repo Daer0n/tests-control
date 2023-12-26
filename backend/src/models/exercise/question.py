@@ -8,7 +8,6 @@ class Question(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     question_text = Column(String, nullable=False)
-    scores = Column(Integer, nullable=False)
     exercise_id = Column(Integer, ForeignKey(Exercise.id))
 
     

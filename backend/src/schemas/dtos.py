@@ -15,7 +15,6 @@ class SaveExerciseDto(BaseModel):
 
 class SaveQuestionDto(BaseModel):
     question_text: str
-    scores: int
     exercise_id: int
 
 class SaveAnswerDto(BaseModel):

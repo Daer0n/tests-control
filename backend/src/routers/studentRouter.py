@@ -5,11 +5,11 @@ from typing import Annotated, Any, AsyncGenerator, Callable, Optional
 from fastapi import APIRouter, Depends, Form, HTTPException, Query, Request, status
 from pydantic import BaseModel
 
-from schemas.filters import GetUserFilter, PatchUserFilter
+from schemas.filters import GetUserFilter, PatchUserFilter, GetExerciseFilter
 from services.studentService import StudentService
-from schemas.schemas import UserCreate
 from schemas.dtos import SaveUserDto
 from routers.authRouter import hash_password
+from shared.shared import ExerciseLevel, ExerciseTopic
 
 
 
@@ -88,5 +88,53 @@ def create_router(
             password=hash_password(password)
         )
         return await service.update_student(filter)
+    
+
+    @router.get(
+        "/exercise/{theme}/{level}/",
+        name="Get random exercise",
+    )
+    async def get_random_exercise(
+        theme: ExerciseTopic,
+        level: ExerciseLevel,
+        service: StudentService = Depends(get_service),
+    ):
+        filter = GetExerciseFilter(
+            theme=theme,
+            level=level
+        )
+        return await service.get_exercise(filter)
+
+    
+    @router.get(
+        "/exercise/question/{question_id}/answers/",
+        name="Get question answers",
+    )
+    async def get_answers(
+        question_id: int,
+        service: StudentService = Depends(get_service),
+    ):
+        return await service.get_answer(question_id)
+    
+    @router.get(
+        "/exercise/question/{question_id}/right-answer/",
+        name="Get right answer for question",
+    )
+    async def get_right_answer(
+        question_id: int,
+        service: StudentService = Depends(get_service),
+    ):
+        return await service.get_right_answer(question_id)
+    
+    @router.get(
+        "/{exercise_id}/questions/",
+        name="Get questions for exercise",
+    )
+    async def get_questions(
+        exercise_id: int,
+        service: StudentService = Depends(get_service),
+    ):
+        return await service.get_questions(exercise_id)
+    
     
     return router

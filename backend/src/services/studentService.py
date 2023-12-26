@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from sqlalchemy.ext.asyncio import AsyncEngine
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
-from schemas.filters import GetUserFilter, PatchUserFilter
+from schemas.filters import GetUserFilter, PatchUserFilter, GetExerciseFilter
 
 from repositories.studentRepositories import StudentRepostitore
 from schemas.dtos import SaveUserDto
@@ -41,3 +41,15 @@ class StudentService():
 
     async def update_student(self, filter: PatchUserFilter):
         return await self._database.update_student(filter)
+    
+    async def get_exercise(self, filter: GetExerciseFilter):
+        return await self._database.get_random_exercise(filter)
+    
+    async def get_questions(self, exercise_id: int):
+        return await self._database.get_questions(exercise_id)
+    
+    async def get_answer(self, question_id: int):
+        return await self._database.get_answer(question_id)
+    
+    async def get_right_answer(self, question_id: int):
+        return await self._database.get_right_answer(question_id)

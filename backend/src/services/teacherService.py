@@ -56,7 +56,6 @@ class TeacherService():
     async def save_question(self, dto: SaveQuestionDto):
         model = Question(
             question_text=dto.question_text,
-            scores=dto.scores,
             exercise_id=dto.exercise_id
         )
         return await self._database.create_question(model)
