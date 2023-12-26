@@ -1,0 +1,47 @@
+.main-content-text {
+    font-size: 150px;
+}
+
+button {
+    border-radius: 0;
+    margin-right: 75px;
+}
+
+button:hover {
+    background-color: inherit;
+    color: inherit;
+}
+
+.green-theme {
+    width: 94px;
+    height: 94px;
+    border: 3px solid #000;
+    background: #01d287;
+}
+
+.dark-theme {
+    width: 94px;
+    height: 94px;
+    border: 3px solid #000;
+    background: #292929;
+}
+
+.blue-theme {
+    width: 94px;
+    height: 94px;
+    border: 3px solid #000;
+    background: #073690;
+}
+
+.wight-theme {
+    width: 94px;
+    height: 94px;
+    border: 3px solid #000;
+    background: #FFFBFF;
+}
+
+.link-back {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}

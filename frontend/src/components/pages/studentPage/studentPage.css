@@ -37,7 +37,7 @@
     height: 101px;
     flex-shrink: 0;
     border-radius: 49px;
-    background: #d795b4;
+    background: #cf749e;
     font-size: 75px;
 }
 
@@ -51,7 +51,7 @@
 
 .complete-random-exercise {
     margin-top: 130px;
-    width: 700px;
+    width: 650px;
     height: 100px;
     flex-shrink: 0;
     font-size: 96px;

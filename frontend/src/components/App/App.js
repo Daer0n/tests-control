@@ -4,6 +4,7 @@ import "./App.css";
 import Auth from "../pages/authPage/authPage";
 import TeacherPage from "../pages/teacherPage/teacherPage";
 import StudentPage from "../pages/studentPage/studentPage";
+import Settings from "../pages/settingsPage/settingsPage";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
                     <Route path="/" element={<Auth />}/> 
                     <Route path="/teacher/" element={<TeacherPage />}/> 
                     <Route path="/student/" element={<StudentPage />}/> 
+                    <Route path="/settings/" element={<Settings />}/> 
                 </Routes>
             </BrowserRouter>
         </div>
