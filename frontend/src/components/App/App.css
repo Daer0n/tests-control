@@ -1,14 +1,33 @@
 @font-face {
     font-family: "Jomhuria";
-    src: url("../../assets/fonts/Jomhuria-Regular.ttf") format("truetype"); 
+    src: url("../../assets/fonts/Jomhuria-Regular.ttf") format("truetype");
 }
 
 html,
 body {
+    font-family: Jomhuria;
     margin: 0;
     padding: 0;
     overflow: hidden;
     height: 100%;
+}
+
+button {
+    font-family: Jomhuria;
+    border: 1px solid #000;
+    background: linear-gradient(180deg, #9e3232 38.54%, #f9e8e8 100%);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+
+button:hover {
+    background: linear-gradient(180deg, #c63b3b 38.54%, #f5cccc 100%);
+}
+
+input {
+    font-family: Jomhuria;
+    background-color: #ffffff;
 }
 
 #root {
