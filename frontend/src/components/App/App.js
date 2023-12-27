@@ -10,6 +10,8 @@ import ExerciseStartPage from "../pages/exercisePages/exerciseCompletePage/exerc
 import ExerciseCompletePage from "../pages/exercisePages/exerciseCompletePage/exerciseCompletePage";
 import ExerciseEndPage from "../pages/exercisePages/exerciseCompletePage/exerciseEndPage/exerciseEndPage";
 import ExerciseStartCreatePage from "../pages/exercisePages/exerciseCreatePage/exerciseStartCreatePage/exerciseStartCreatePage";
+import ExerciseCreatePage from "../pages/exercisePages/exerciseCreatePage/exerciseCreatePage";
+import ExerciseEndCreatePage from "../pages/exercisePages/exerciseCreatePage/exerciseEndCreatePage/exerciseEndCreatePage";
 
 function App() {
   const { theme, setTheme } = useTheme();
@@ -30,6 +32,8 @@ function App() {
           <Route path="/student/exercise/complete/:exerciseId" element={<ExerciseCompletePage />} />
           <Route path="/student/exercise/end/:amountOfQuestion/:amountOfRightQuestion" element={<ExerciseEndPage />} />
           <Route path="/teacher/exercise/start/:theme/:level" element={<ExerciseStartCreatePage />} />
+          <Route path="/teacher/exercise/create/:exerciseId/:amountOfQuestions" element={<ExerciseCreatePage />} />
+          <Route path="/teacher/exercise/end" element={<ExerciseEndCreatePage />} />
         </Routes>
       </BrowserRouter>
     </div>

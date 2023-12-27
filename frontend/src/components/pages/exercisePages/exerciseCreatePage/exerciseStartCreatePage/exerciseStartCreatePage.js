@@ -10,6 +10,7 @@ const ExerciseStartCreatePage = () => {
     const level = parts[parts.length - 1];
     const [numberOfExercise, setNumberOfExercise] = useState(0);
     const [theoryInput, setTheoryInput] = useState("");
+    const [exerciseId, setExerciseId] = useState();
     const navigate = useNavigate();
 
     const handleTheoryInputChange = (event) => {
@@ -18,10 +19,10 @@ const ExerciseStartCreatePage = () => {
 
     const handleCreateExercise = async () => {
         try {
-            await api.post(
+            const responce = await api.post(
                 `/teacher/exercise/${theoryInput}/${theme}/${level}`
             );
-            navigate("/to/...");
+            navigate(`/teacher/exercise/create/${responce.data.id}/${numberOfExercise}`);
         } catch (error) {
             console.error(error);
         }
