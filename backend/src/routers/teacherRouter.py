@@ -7,7 +7,6 @@ from pydantic import BaseModel
 
 from schemas.filters import GetUserFilter, PatchUserFilter
 from services.teacherService import TeacherService
-from schemas.schemas import UserCreate
 from schemas.dtos import SaveAnswerDto, SaveUserDto, SaveQuestionDto, SaveExerciseDto
 from routers.authRouter import hash_password
 

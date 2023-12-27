@@ -90,7 +90,7 @@ const ExerciseCreatePage = () => {
                                 className="write-answer"
                                 value={answerInputValues[0]}
                                 onChange={
-                                    (event) => handleAnswerInputChange(event, 0) // исправленный индекс
+                                    (event) => handleAnswerInputChange(event, 0) 
                                 }
                             />
                         </div>
@@ -107,7 +107,7 @@ const ExerciseCreatePage = () => {
                                 className="write-answer"
                                 value={answerInputValues[1]}
                                 onChange={
-                                    (event) => handleAnswerInputChange(event, 1) // исправленный индекс
+                                    (event) => handleAnswerInputChange(event, 1) 
                                 }
                             />
                         </div>
@@ -124,7 +124,7 @@ const ExerciseCreatePage = () => {
                                 className="write-answer"
                                 value={answerInputValues[2]}
                                 onChange={
-                                    (event) => handleAnswerInputChange(event, 2) // исправленный индекс
+                                    (event) => handleAnswerInputChange(event, 2) 
                                 }
                             />
                         </div>
@@ -141,7 +141,7 @@ const ExerciseCreatePage = () => {
                                 className="write-answer"
                                 value={answerInputValues[3]}
                                 onChange={
-                                    (event) => handleAnswerInputChange(event, 3) // исправленный индекс
+                                    (event) => handleAnswerInputChange(event, 3) 
                                 }
                             />
                         </div>

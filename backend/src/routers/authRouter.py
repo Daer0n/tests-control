@@ -15,7 +15,6 @@ from models.users.teacher import Teacher
 from config import SECRET_AUTH
 from services.studentService import StudentService
 from services.teacherService import TeacherService
-from schemas.schemas import UserCreate
 from schemas.filters import GetUserFilter
 
 
