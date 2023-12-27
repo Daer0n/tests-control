@@ -1,0 +1,20 @@
+.text {
+    font-size: 96px;
+}
+
+.theory-container {
+    height: 500px;
+    width: 800px; /* Задайте фиксированную высоту контейнера для текста */
+    overflow: auto; /* Или overflow: scroll; */
+}
+
+.theory {
+    word-wrap: break-word;
+}
+
+.start-exercise {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

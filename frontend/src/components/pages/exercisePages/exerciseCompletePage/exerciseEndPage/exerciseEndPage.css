@@ -1,0 +1,32 @@
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+
+.main-content {
+    text-align: center;
+}
+
+.score {
+    font-size: 96px;
+    text-align: center;
+}
+
+.score-text {
+    margin-bottom: 100px;
+}
+
+.back-to-main-page {
+    margin-left: 80px;
+    margin-top: 250px;
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center;
+    width: 380px;
+    height: 116px;
+    font-size: 96px;
+    border-radius: 20px;
+}

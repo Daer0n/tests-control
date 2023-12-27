@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "./teacherPage.css";
 import api from "../../../api/api";
 import { useNavigate } from "react-router-dom";
 import Settings from "../../../assets/images/Settings.svg";
 import Vector from "../../../assets/images/Vector.svg";
 
-
 const TeacherPage = () => {
     const navigate = useNavigate();
+    const [selectedTheme, setSelectedTheme] = useState("");
+    const [selectedLevel, setSelectedLevel] = useState("");
 
     const handleLogout = async () => {
         await api.post("/auth/logout/");
         navigate("/");
     };
 
+    const handleThemeSelection = (theme) => {
+        setSelectedTheme(theme);
+    };
+
+    const handleLevelSelection = (level) => {
+        setSelectedLevel(level);
+    };
     return (
         <div className="student-main-page">
             <nav>
@@ -32,9 +40,30 @@ const TeacherPage = () => {
                 <div>
                     <div className="button-description">Theme</div>
                     <div className="theme-buttons">
-                        <button className="choice-button">Math</button>
-                        <button className="choice-button">English</button>
-                        <button className="choice-button">Nature</button>
+                        <button
+                            className={`choice-button ${
+                                selectedTheme === "Math" ? "selected" : ""
+                            }`}
+                            onClick={() => handleThemeSelection("Math")}
+                        >
+                            Math
+                        </button>
+                        <button
+                            className={`choice-button ${
+                                selectedTheme === "English" ? "selected" : ""
+                            }`}
+                            onClick={() => handleThemeSelection("English")}
+                        >
+                            English
+                        </button>
+                        <button
+                            className={`choice-button ${
+                                selectedTheme === "Nature" ? "selected" : ""
+                            }`}
+                            onClick={() => handleThemeSelection("Nature")}
+                        >
+                            Nature
+                        </button>
                     </div>
                 </div>
                 <div>
@@ -42,9 +71,30 @@ const TeacherPage = () => {
                         Difficulty
                     </div>
                     <div className="difficluty-buttons">
-                        <button className="choice-button">Easy</button>
-                        <button className="choice-button">Medium</button>
-                        <button className="choice-button">Hard</button>
+                        <button
+                            className={`choice-button ${
+                                selectedLevel === "Easy" ? "selected" : ""
+                            }`}
+                            onClick={() => handleLevelSelection("Easy")}
+                        >
+                            Easy
+                        </button>
+                        <button
+                            className={`choice-button ${
+                                selectedLevel === "Medium" ? "selected" : ""
+                            }`}
+                            onClick={() => handleLevelSelection("Medium")}
+                        >
+                            Medium
+                        </button>
+                        <button
+                            className={`choice-button ${
+                                selectedLevel === "Hard" ? "selected" : ""
+                            }`}
+                            onClick={() => handleLevelSelection("Hard")}
+                        >
+                            Hard
+                        </button>
                     </div>
                 </div>
                 <button className="create-exercise">Create exercise</button>
