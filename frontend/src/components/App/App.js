@@ -9,6 +9,7 @@ import Settings from "../pages/settingsPage/settingsPage";
 import ExerciseStartPage from "../pages/exercisePages/exerciseCompletePage/exerciseStartPage/exerciseStartPage";
 import ExerciseCompletePage from "../pages/exercisePages/exerciseCompletePage/exerciseCompletePage";
 import ExerciseEndPage from "../pages/exercisePages/exerciseCompletePage/exerciseEndPage/exerciseEndPage";
+import ExerciseStartCreatePage from "../pages/exercisePages/exerciseCreatePage/exerciseStartCreatePage/exerciseStartCreatePage";
 
 function App() {
   const { theme, setTheme } = useTheme();
@@ -28,6 +29,7 @@ function App() {
           <Route path="/student/exercise/start/:exerciseId" element={<ExerciseStartPage />} />
           <Route path="/student/exercise/complete/:exerciseId" element={<ExerciseCompletePage />} />
           <Route path="/student/exercise/end/:amountOfQuestion/:amountOfRightQuestion" element={<ExerciseEndPage />} />
+          <Route path="/teacher/exercise/start/:theme/:level" element={<ExerciseStartCreatePage />} />
         </Routes>
       </BrowserRouter>
     </div>

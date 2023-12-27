@@ -18,8 +18,8 @@ const ExerciseCompletePage = () => {
       try {
         const response = await api.get(`/student/${exerciseId}/questions/`);
         setQuestions(response.data);
-        setNumberOfQuestions(0); // Сбросить количество вопросов при загрузке нового упражнения
-        setNumberOfRightQuestions(0); // Сбросить количество правильных ответов при загрузке нового упражнения
+        setNumberOfQuestions(0); 
+        setNumberOfRightQuestions(0); 
       } catch (error) {
         console.error(error);
       }
@@ -31,7 +31,7 @@ const ExerciseCompletePage = () => {
   useEffect(() => {
     if (questions && questions.length > 0) {
       handleGetAnswers();
-      setSelectedAnswer(""); // Сбросить выбранный ответ при изменении вопроса
+      setSelectedAnswer(""); 
     }
   }, [questions, currentQuestionIndex]);
 
@@ -87,7 +87,7 @@ const ExerciseCompletePage = () => {
                     name="answer"
                     className="answer"
                     value={answer.text}
-                    checked={selectedAnswer === answer.text} // Добавлено свойство checked
+                    checked={selectedAnswer === answer.text} 
                     onChange={handleSelectAnswer}
                   />
                   <label htmlFor={`answer-${index}`}>{answer.text}</label>

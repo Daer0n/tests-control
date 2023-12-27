@@ -9,7 +9,6 @@ const StudentPage = () => {
     const navigate = useNavigate();
     const [selectedTheme, setSelectedTheme] = useState("");
     const [selectedLevel, setSelectedLevel] = useState("");
-    // const [selectedExerciseId, setSelectedExerciseId] = useState();
 
     const handleLogout = async () => {
         await api.post("/auth/logout/");

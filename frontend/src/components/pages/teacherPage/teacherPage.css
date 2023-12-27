@@ -55,4 +55,5 @@
     height: 100px;
     flex-shrink: 0;
     font-size: 96px;
+    border-radius: 20px;
 }

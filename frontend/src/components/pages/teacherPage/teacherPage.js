@@ -97,7 +97,7 @@ const TeacherPage = () => {
                         </button>
                     </div>
                 </div>
-                <button className="create-exercise">Create exercise</button>
+                <button className="create-exercise" onClick={() => navigate(`/teacher/exercise/start/${selectedTheme}/${selectedLevel}`)}>Create exercise</button>
             </div>
             <footer>
                 <div className="logout" onClick={handleLogout}>
