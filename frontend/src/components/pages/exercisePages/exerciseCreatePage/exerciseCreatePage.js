@@ -42,7 +42,7 @@ const ExerciseCreatePage = () => {
 
             for (let i = 0; i < 4; i++) {
                 let text = answerInputValues[i].replace(/ /g, "_");
-                const isCorrect = i === selectedAnswer ? true : false;
+                const isCorrect = i == selectedAnswer ? true : false;
                 await api.post(
                     `teacher/answer/${text}/${isCorrect}/${response.data.id}/`
                 );
@@ -80,17 +80,34 @@ const ExerciseCreatePage = () => {
                         <div className="answer">
                             <input
                                 type="radio"
-                                className="answer-radio"
                                 name="answer"
-                                value="1"
-                                checked={selectedAnswer === "1"}
+                                value="0"
+                                className="answer-radio"
+                                checked={selectedAnswer === "0"}
                                 onChange={handleRadioChange}
                             />
                             <input
                                 className="write-answer"
                                 value={answerInputValues[0]}
-                                onChange={(event) =>
-                                    handleAnswerInputChange(event, 0)
+                                onChange={
+                                    (event) => handleAnswerInputChange(event, 0) // исправленный индекс
+                                }
+                            />
+                        </div>
+                        <div className="answer">
+                            <input
+                                type="radio"
+                                name="answer"
+                                value="1"
+                                className="answer-radio"
+                                checked={selectedAnswer === "1"}
+                                onChange={handleRadioChange}
+                            />
+                            <input
+                                className="write-answer"
+                                value={answerInputValues[1]}
+                                onChange={
+                                    (event) => handleAnswerInputChange(event, 1) // исправленный индекс
                                 }
                             />
                         </div>
@@ -105,9 +122,9 @@ const ExerciseCreatePage = () => {
                             />
                             <input
                                 className="write-answer"
-                                value={answerInputValues[1]}
-                                onChange={(event) =>
-                                    handleAnswerInputChange(event, 1)
+                                value={answerInputValues[2]}
+                                onChange={
+                                    (event) => handleAnswerInputChange(event, 2) // исправленный индекс
                                 }
                             />
                         </div>
@@ -122,26 +139,9 @@ const ExerciseCreatePage = () => {
                             />
                             <input
                                 className="write-answer"
-                                value={answerInputValues[2]}
-                                onChange={(event) =>
-                                    handleAnswerInputChange(event, 2)
-                                }
-                            />
-                        </div>
-                        <div className="answer">
-                            <input
-                                type="radio"
-                                name="answer"
-                                value="4"
-                                className="answer-radio"
-                                checked={selectedAnswer === "4"}
-                                onChange={handleRadioChange}
-                            />
-                            <input
-                                className="write-answer"
                                 value={answerInputValues[3]}
-                                onChange={(event) =>
-                                    handleAnswerInputChange(event, 3)
+                                onChange={
+                                    (event) => handleAnswerInputChange(event, 3) // исправленный индекс
                                 }
                             />
                         </div>

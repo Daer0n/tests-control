@@ -7,6 +7,7 @@ const ExerciseCompletePage = () => {
   const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [initialQuestionIndex, setInitialQuestionIndex] = useState(0); // Новое состояние
   const [answers, setAnswers] = useState([]);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [numberOfQuestions, setNumberOfQuestions] = useState(0);
@@ -18,8 +19,9 @@ const ExerciseCompletePage = () => {
       try {
         const response = await api.get(`/student/${exerciseId}/questions/`);
         setQuestions(response.data);
-        setNumberOfQuestions(0); 
-        setNumberOfRightQuestions(0); 
+        setInitialQuestionIndex(response.data[0].id); // Установка значения initialQuestionIndex
+        setNumberOfQuestions(0);
+        setNumberOfRightQuestions(0);
       } catch (error) {
         console.error(error);
       }
@@ -31,24 +33,28 @@ const ExerciseCompletePage = () => {
   useEffect(() => {
     if (questions && questions.length > 0) {
       handleGetAnswers();
-      setSelectedAnswer(""); 
+      setSelectedAnswer("");
     }
   }, [questions, currentQuestionIndex]);
 
   useEffect(() => {
     if (numberOfQuestions === questions.length && numberOfQuestions > 0) {
-      navigate(`/student/exercise/end/${numberOfQuestions}/${numberOfRightQuestions}`);
+      navigate(
+        `/student/exercise/end/${numberOfQuestions}/${numberOfRightQuestions}`
+      );
     }
   }, [numberOfQuestions, numberOfRightQuestions, navigate, questions.length]);
 
-
   const handleAnswerSubmit = async () => {
     const response = await api.get(
-      `/student/exercise/question/${currentQuestionIndex + 1}/right-answer/`
+      `/student/exercise/question/${initialQuestionIndex}/right-answer/`
     );
-    if (selectedAnswer === response.data.text) {
+    console.log(selectedAnswer)
+    console.log(response.data.text)
+    if (selectedAnswer == response.data.text) {
       setNumberOfRightQuestions((prevCount) => prevCount + 1);
     }
+    setInitialQuestionIndex((prevCount) => prevCount + 1)
     setNumberOfQuestions((prevCount) => prevCount + 1);
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -58,7 +64,7 @@ const ExerciseCompletePage = () => {
   const handleGetAnswers = async () => {
     try {
       const response = await api.get(
-        `/student/exercise/question/${currentQuestionIndex + 1}/answers/`
+        `/student/exercise/question/${initialQuestionIndex}/answers/`
       );
       setAnswers(response.data);
     } catch (error) {
@@ -87,7 +93,7 @@ const ExerciseCompletePage = () => {
                     name="answer"
                     className="answer"
                     value={answer.text}
-                    checked={selectedAnswer === answer.text} 
+                    checked={selectedAnswer === answer.text}
                     onChange={handleSelectAnswer}
                   />
                   <label htmlFor={`answer-${index}`}>{answer.text}</label>
