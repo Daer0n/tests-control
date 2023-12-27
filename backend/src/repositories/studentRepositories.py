@@ -91,4 +91,10 @@ class StudentRepostitore:
             raise HTTPException(status_code=404, detail="Right question not found")
         return items[0]
 
-
+    async def get_exercise_by_id(self, id: int) -> Exercise:
+        stmt = select(Exercise).where(Exercise.id == id)
+        results = await self.session.scalars(stmt)
+        items = list(results.all())
+        if not items:
+            raise HTTPException(status_code=404, detail="Exercise not found")
+        return items[0]

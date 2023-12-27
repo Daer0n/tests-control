@@ -95,15 +95,26 @@ def create_router(
         name="Get random exercise",
     )
     async def get_random_exercise(
-        theme: ExerciseTopic,
-        level: ExerciseLevel,
+        theme: str,
+        level: str,
         service: StudentService = Depends(get_service),
     ):
         filter = GetExerciseFilter(
-            theme=theme,
-            level=level
+            theme=get_exercise_theme_enum(theme),
+            level=get_exercise_level_enum(level)
         )
         return await service.get_exercise(filter)
+    
+
+    @router.get(
+        "/exercise/{id}/",
+        name="Get exercise",
+    )
+    async def get_exercise_by_id(
+        id: int, 
+        service: StudentService = Depends(get_service),
+    ):
+        return await service.get_exercise_by_id(id)
 
     
     @router.get(
@@ -138,3 +149,23 @@ def create_router(
     
     
     return router
+
+
+def get_exercise_theme_enum(exercise_topic: str):
+    if exercise_topic == "Math":
+        return ExerciseTopic.MATH
+    elif exercise_topic == "English":
+        return ExerciseTopic.ENGLISH
+    elif exercise_topic == "Nature":
+        return ExerciseTopic.NATURE
+    else:
+        return None
+    
+def get_exercise_level_enum(exercise_level: str):
+    if exercise_level == "Easy":
+        return ExerciseLevel.EASY
+    elif exercise_level == "Medium":
+        return ExerciseLevel.MEDIUM
+    elif exercise_level == "Hard":
+        return ExerciseLevel.HARD
+    else: return None

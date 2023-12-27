@@ -111,7 +111,7 @@ def create_router(
         return await service.save_exercise(dto)
     
     @router.post(
-        "/question/{question_text}/{scores}/{exercise_id}/",
+        "/question/{question_text}/{exercise_id}/",
         name="Add question",
     )
     async def add_question(
@@ -123,6 +123,7 @@ def create_router(
             question_text=question_text,
             exercise_id=exercise_id
         )
+        print(dto.question_text, dto.exercise_id)
         return await service.save_question(dto)
     
     @router.post(

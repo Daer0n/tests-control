@@ -53,3 +53,6 @@ class StudentService():
     
     async def get_right_answer(self, question_id: int):
         return await self._database.get_right_answer(question_id)
+    
+    async def get_exercise_by_id(self, exercise_id: int):
+        return await self._database.get_exercise_by_id(exercise_id)
